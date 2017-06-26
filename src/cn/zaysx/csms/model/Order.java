@@ -1,6 +1,5 @@
 package cn.zaysx.csms.model;
 
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,7 +31,7 @@ public class Order {
 	private Customer customer;
 	
 	@Column(name="orderTime")
-	private Date orderTime;
+	private String orderTime;
 	
 	@Column(name="orderTotal")
 	private double orderTotal;
@@ -92,11 +91,11 @@ public class Order {
 		this.customer = customer;
 	}
 
-	public Date getOrderTime() {
+	public String getOrderTime() {
 		return orderTime;
 	}
 
-	public void setOrderTime(Date orderTime) {
+	public void setOrderTime(String orderTime) {
 		this.orderTime = orderTime;
 	}
 

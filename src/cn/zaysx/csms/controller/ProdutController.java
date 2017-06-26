@@ -71,37 +71,23 @@ public class ProdutController {
 	
 	//分页显示订单
 	@RequestMapping(value = "listProduct")
-    public ModelAndView  showOrder(@RequestParam("page") Integer page){
+    public ModelAndView  showOrder(@RequestParam("page") Integer page,
+    		@RequestParam("type") Integer type){
 		//订单总页数
-		Integer count = productService.findCount();
+		Integer count = productService.findCount(type);
         if (page > count) {
             page = 1;
         }
         //分页查询订单
-		List<Product> listProduct = productService.listProduct(page, 1);
+		List<Product> listProduct = productService.listProduct(page, type);
 		ModelAndView mod = new ModelAndView("product_list");
 		mod.addObject("listProduct", listProduct);
 		mod.addObject("count", count);
 		mod.addObject("page", page);
+		mod.addObject("type", type);
     	return mod;
     }
-	
-	@RequestMapping(value = "recycleProduct")
-    public ModelAndView  recycleProduct(@RequestParam("page") Integer page){
-		//订单总页数
-		Integer count = productService.findCount();
-        if (page > count) {
-            page = 1;
-        }
-        //分页查询订单
-		List<Product> listProduct = productService.listProduct(page, 0);
-		ModelAndView mod = new ModelAndView("product_list");
-		mod.addObject("listProduct", listProduct);
-		mod.addObject("count", count);
-		mod.addObject("page", page);
-    	return mod;
-    }
-	
+
 	//查找商品进入详情页
 	@RequestMapping(value = "product_edit")
     public ModelAndView  findById(@RequestParam("id") Integer productId){
@@ -200,6 +186,9 @@ public class ProdutController {
         	modelAndView.addObject("msg", "删除成功！");
         return modelAndView;
     }
+    
     //预览商品
+    
+    
     
 }

@@ -9,28 +9,13 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>后台管理系统</title>
-	<link rel="stylesheet" type="text/css" href="../css/style.css">
-	<script src="../js/jquery.js"></script>
-	<script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
-	<script>
-		(function($){
-			$(window).load(function(){			
-				$("a[rel='load-content']").click(function(e){
-					e.preventDefault();
-					var url=$(this).attr("href");
-					$.get(url,function(data){
-						$(".content .mCSB_container").append(data); //load new content inside .mCSB_container
-						//scroll-to appended content 
-						$(".content").mCustomScrollbar("scrollTo","h2:last");
-					});
-				});
-				
-				$(".content").delegate("a[href='top']","click",function(e){
-					e.preventDefault();
-					$(".content").mCustomScrollbar("scrollTo",$(this).attr("href"));
-				});
-			});
-		})(jQuery);
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
+	<script src="${pageContext.request.contextPath}/js/jquery.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	<script type="text/javascript">
+		$('a').click(function(){
+		    $(this).addClass('active').siblings().removeClass('active');
+		})
 	</script>
 </head>
 <body>
@@ -89,28 +74,27 @@
       <aside class="paging">
         第 <c:out value="${page}"/>/<c:out value="${count}"/>页
 	   <!-- 首页 -->
-	   <a class="firstPage" href="${pageContext.request.contextPath}/listProduct?page=1">首页</a>
-	      
+	   <a class="firstPage" href="${pageContext.request.contextPath}/listProduct?page=1&type=<c:out value="${type}"/>">首页</a>
 	      <!-- 上一页 -->
 	      <c:if test="${page != 1}">
-			<a class="previousPage" href="${pageContext.request.contextPath}/listProduct?page=<c:out value="${page-1}"/>">上一页</a>
+			<a class="previousPage" href="${pageContext.request.contextPath}/listProduct?page=<c:out value="${page-1}"/>&type=<c:out value="${type}"/>">上一页</a>
           </c:if>
           <c:forEach var="i" begin="1" end="${count }">
 			<!-- 如果是当前页则不能够点击 --> 
 			<c:if test="${i == page }">
            <a>${page }</a>
             </c:if> <c:if test="${i != page }">
-			<a href="${pageContext.request.contextPath}/listProduct?page=<c:out value="${i}"/>">
+			<a href="${pageContext.request.contextPath}/listProduct?page=<c:out value="${i}"/>&type=<c:out value="${type}"/>">
 			<c:out value="${i}"/>
 			</a>
             </c:if>
             </c:forEach>
              <!-- 下一页 -->
             <c:if test="${page !=count }">
-			<a class="nextPage" href="${pageContext.request.contextPath}/listProduct?page=<c:out value="${page+1}"/>">下一页</a>
+			<a class="nextPage" href="${pageContext.request.contextPath}/listProduct?page=<c:out value="${page+1}"/>&type=<c:out value="${type}"/>">下一页</a>
             </c:if>
             <!-- 尾页 -->
-            <a class="lastPage" href="${pageContext.request.contextPath}/listProduct?page=<c:out value="${count}"/>">尾页</a>
+            <a class="lastPage" href="${pageContext.request.contextPath}/listProduct?page=<c:out value="${count}"/>&type=<c:out value="${type}"/>">尾页</a>
       </aside>
  </div>
 </section>

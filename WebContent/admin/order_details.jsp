@@ -104,12 +104,10 @@
       <aside class="mtb" style="text-align:right;">
        <label>管理员操作：</label>
        <input type="text" class="textbox textbox_295" placeholder="管理员操作备注"/>
-       <input type="button" value="打印订单" class="group_btn"/>
-       <input type="button" value="确认订单" class="group_btn"/>
-       <input type="button" value="付款" class="group_btn"/>
-       <input type="button" value="配货" class="group_btn"/>
-       <input type="button" value="发货" class="group_btn"/>
-       <input type="button" value="确认收货" class="group_btn"/>
+       <input type="button" value="打印订单" class="group_btn" name = "stamp"/>
+       <input type="button" value="确认订单" class="group_btn" name = "confirm"/>
+       <input type="button" value="配货" class="group_btn" name = "prepare"/>   
+       <input type="button" value="发货" class="group_btn" name = "send"/>      
         </c:if>
         <c:if test="${order==null}">
         ${msg}
@@ -124,6 +122,11 @@
 		var s_order = document.getElementById("s_order").value;
 		window.location.href = '${pageContext.request.contextPath}/order_details?id='+s_order;
 	}
+	$('.group_btn').click(function(){
+		window.location.href = '${pageContext.request.contextPath}/order_op?op='+this.name+"&id="+${order.orderId};
+		alert(this.value);
+		alert($(this).attr('name'));
+	})
 	</script>
 </body>
 </html>

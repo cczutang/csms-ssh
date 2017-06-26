@@ -69,8 +69,8 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public Integer findCount() {
-		Integer count = productDAO.CountProduct();
+	public Integer findCount(Integer productEnable) {
+		Integer count = productDAO.CountProduct(productEnable);
 		return (count % 5 == 0 ? (count / 5) : (count / 5 + 1));
 	}
 

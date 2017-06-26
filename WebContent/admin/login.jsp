@@ -34,7 +34,7 @@
   <em>Computer Sales Manager System</em>
  </dt>
  <dd class="user_icon">
-  <input type="text" placeholder="账号" class="login_txtbx" name = "managerName"/>
+  <input type="text" placeholder="账号" class="login_txtbx" name = "managerName" required="required"/>
  </dd>
  <dd class="pwd_icon">
   <input type="password" placeholder="密码" class="login_txtbx" name = "managerPwd"/>

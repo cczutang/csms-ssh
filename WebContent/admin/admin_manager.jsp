@@ -9,30 +9,9 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>后台管理系统</title>
-	<link rel="stylesheet" type="text/css" href="../css/style.css">
-	<script src="../js/jquery.js"></script>
-	<script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
-	<!-- <script>
-		(function($){
-			$(window).load(function(){
-				
-				$("a[rel='load-content']").click(function(e){
-					e.preventDefault();
-					var url=$(this).attr("href");
-					$.get(url,function(data){
-						$(".content .mCSB_container").append(data); //load new content inside .mCSB_container
-						//scroll-to appended content 
-						$(".content").mCustomScrollbar("scrollTo","h2:last");
-					});
-				});
-				
-				$(".content").delegate("a[href='top']","click",function(e){
-					e.preventDefault();
-					$(".content").mCustomScrollbar("scrollTo",$(this).attr("href"));
-				});
-			});
-		})(jQuery);
-	</script> -->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
+	<script src="${pageContext.request.contextPath}/js/jquery.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.mCustomScrollbar.concat.min.js"></script>
 </head>
 </head>
 <body>
@@ -40,13 +19,16 @@
  <div class="rt_content">
       <div class="page_title">
        <h2 class="fl">会员列表</h2>
-       <a href="user_detail.html" class="fr top_rt_btn add_icon">添加新会员</a>
       </div>
       <section class="mtb">
-       <select class="select">
-        <option>会员等级</option>
-        <option>普通会员</option>
-        <option>高级会员</option>
+       <select class="select" name = "cusLevel">
+        <option value = "">会员等级</option>
+        <option value = "青铜会员">青铜会员</option>
+        <option value = "白银会员">白银会员</option>
+        <option value = "黄金会员">黄金会员</option>
+        <option value = "铂金会员">铂金会员</option>
+        <option value = "钻石会员">钻石会员</option>
+        <option value = "荣誉会员">荣誉会员</option>
        </select>
        <input type="text" class="textbox textbox_225" placeholder="输入会员号/手机/电子邮件查询..."/>
        <input type="button" value="查询" class="group_btn"/>
@@ -77,8 +59,7 @@
         <td class="center">
          <strong class="rmb_icon">59.00</strong>
         </td>
-        <td class="center">
-         <a href="${pageContext.request.contextPath}/admin_edit?id=${c.cusId}" title="编辑" class="link_icon">&#101;</a>
+        <td class="center">      
          <a href="${pageContext.request.contextPath}/admin_edit?id=${c.cusId}" title="编辑" class="link_icon">&#101;</a>
         </td>
        </tr>

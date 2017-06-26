@@ -1,6 +1,7 @@
 package cn.zaysx.csms.dao.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -68,6 +69,19 @@ public class AdminDAOImpl implements AdminDAO {
 		Query query = this.getCurrentSession().createQuery(hql);
 		List<Customer> list = query.list();
         return list.size();
+	}
+
+	@Override
+	public Customer findCustomer(String cusId) {
+		String hql = "from Customer where cusId=:id";
+        Query query = this.getCurrentSession().createQuery(hql).
+        		setParameter("id", cusId);
+        return (Customer) query.uniqueResult();
+	}
+
+	@Override
+	public void updateCussstomer(Customer customer) {
+		this.getCurrentSession().update(customer);
 	}
 
 }

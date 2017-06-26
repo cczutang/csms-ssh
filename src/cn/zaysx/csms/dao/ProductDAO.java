@@ -37,7 +37,7 @@ public interface ProductDAO extends BaseDAO<Product>{
      *计算个数
      * @return
      */
-    public Integer CountProduct();
+    public Integer CountProduct(Integer productEnable);
     
     /**
      * 根据ID查找一个产品

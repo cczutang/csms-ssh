@@ -72,8 +72,8 @@ public class ProductDAOImpl extends BaseDAOImpl<Product> implements ProductDAO {
 	}
 
 	@Override
-	public Integer CountProduct() {
-		String hql = "select count(*) from Product where productEnable = 1";
+	public Integer CountProduct(Integer productEnable) {
+		String hql = "select count(*) from Product where productEnable ="+productEnable;
         return count(hql);
 	}
 

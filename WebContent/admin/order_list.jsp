@@ -57,7 +57,7 @@
 	        <th>联系电话</th>
 	        <th>收件人地址</th>
 	        <th>订单金额</th>
-	        <th>配送方式</th>
+	        <th>订单状态</th>
 	        <th>操作</th>
 	       </tr>
 	       
@@ -70,7 +70,7 @@
 	         <address> ${o.orderAddr }</address>
 	        </td>
 	        <td class="center"><strong class="rmb_icon"> ${o.orderTotal }</strong></td>
-	        <td class="center"> ${o.orderEMS}</td>
+	        <td class="center"> ${o.orderStatus}</td>
 	        <td class="center">
 	         <a href="${pageContext.request.contextPath}/order_details?id=${o.orderId}" title="查看订单" class="link_icon" target="_blank">&#118;</a>
 	         <a href="${pageContext.request.contextPath}/order_delete?id=${o.orderId}" title="删除" class="link_icon" >&#100;</a>

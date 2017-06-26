@@ -15,6 +15,17 @@ public class Customer {
     @Id
 	private String cusId;
 	
+	@Column(name="cusCode")
+	private String cusCode;
+	
+	public String getCusCode() {
+		return cusCode;
+	}
+
+	public void setCusCode(String cusCode) {
+		this.cusCode = cusCode;
+	}
+
 	@Column(name="cusName")
 	private String cusName;
 	

@@ -38,7 +38,7 @@ public interface ProductService {
     public void save(Product save);
     
     //查找所有
-    public Integer findCount();
+    public Integer findCount(Integer productEnable);
     
     public int delProductByEnable(Integer productId);
 }

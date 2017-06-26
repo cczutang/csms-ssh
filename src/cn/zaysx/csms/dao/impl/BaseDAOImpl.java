@@ -46,12 +46,6 @@ public class BaseDAOImpl<T> implements BaseDAO<T> {
         return clz;
     }
     
-/*    public BaseDAOImpl(){
-    	ParameterizedType pType=(ParameterizedType) this.getClass().getGenericSuperclass();
-    	clz=(Class) pType.getActualTypeArguments()[0];
-    	System.out.print(clz.getSimpleName());
-    }
-*/
 	@Override
 	public void save(T o) {
 		sessionFactory.getCurrentSession().save(o);

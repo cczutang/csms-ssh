@@ -9,11 +9,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>网上商城</title>
 
-    <link href="${pageContext.request.contextPath}/css/slider.css"
+    <link href="${pageContext.request.contextPath}/css/front-end/slider.css"
           rel="stylesheet" type="text/css"/>
-    <link href="${pageContext.request.contextPath}/css/common.css"
+    <link href="${pageContext.request.contextPath}/css/front-end/common.css"
           rel="stylesheet" type="text/css"/>
-    <link href="${pageContext.request.contextPath}/css/index.css"
+    <link href="${pageContext.request.contextPath}/css/front-end/index.css"
           rel="stylesheet" type="text/css"/>
 
 </head>

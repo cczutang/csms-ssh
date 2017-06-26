@@ -83,10 +83,31 @@ public class OrderController {
         	map.put("msg", "系统暂无该订单！请核实后再进行查询！");
 
         order.setOrderEnable(0);
-        orderService.update(order);
-        
+        orderService.update(order);       
         map.put("order", order);    
         return "order_list";
     }
     
+    //管理员操作订单
+    @RequestMapping(value = "order_op")
+    public String opByOid(@RequestParam("op") String op,@RequestParam("id") String id, 
+    		Map<String, Object> map) {
+    	Order order = orderService.findByOid(id);
+    	String orderStatus = order.getOrderStatus();
+    	switch(op){
+	    	case "stamp":{
+	    		
+	    	}
+	    	case "confirm":{
+	    		
+	    	}
+	    	case "prepare":{
+	    		
+	    	}
+	    	case "send":{
+	    		
+	    	}
+    	}
+        return "order_details";
+    }
 }

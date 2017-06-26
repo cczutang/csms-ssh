@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.8.3.js"></script>
@@ -10,7 +10,7 @@
   $(function(){
 	  //点击更换验证码
 	   $("#captchaImage").click(function(){		   
-	   		$("#captchaImage").attr("src","${pageContext.request.contextPath}/getCheckCodeImage?date="+new Date().getTime());		   
+	   		$("#captchaImage").attr("src","${pageContext.request.contextPath}/getCheckCode?date="+new Date().getTime());		   
 	   });
    });
   $(function(){
@@ -22,64 +22,45 @@
 
 <title>会员登录</title>
 
-<link href="${pageContext.request.contextPath}/css/common.css"
+<link href="${pageContext.request.contextPath}/css/front-end/common.css"
 	rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/css/login.css"
+<link href="${pageContext.request.contextPath}/css/front-end/login.css"
 	rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-
+<jsp:useBean id="customer"  class="cn.zaysx.csms.model.Customer" scope="request" ></jsp:useBean>
 	<div class="container header">
-		<div class="span5">
-
-		</div>
+		<div class="span5"></div>
 		<div class="span9">
-			<div class="headerAd">
-
-			</div>
+			<div class="headerAd"></div>
 		</div>
-
 		<%@ include file="menu.jsp"%>
-
 	</div>
-
 	<div class="container login">
 		<div class="span12">
-			<div class="ad">
-
-			</div>
+			<div class="ad"></div>
 		</div>
 		<div class="span12 last">
 			<div class="wrap">
 				<div class="main">
-					<div class="title">
-						<strong>会员登录</strong>USER LOGIN
-					</div>
-
-					<form:form id="loginForm" modelAttribute="user" commandName="user"
-						action="${ pageContext.request.contextPath }/login"
+					<div class="title"><strong>会员登录</strong>USER LOGIN</div>
+					<form:form id="loginForm" modelAttribute="customer" action="${pageContext.request.contextPath }/login"
 						method="post">
 						<table>
 							<tbody>
 								<tr>
 									<th>用户名:</th>
-									<td><form:input path="username" name="username" id="username"
+									<td><form:input path="cusName" name="cusName" id="cusName"
 										class="text" maxlength="20" />
-										<%--
-										<c:if test="${notUser != null }">
-										    <font color="red">没有此用户</font>
-										</c:if>
-										--%>
 										<c:if test="${notActive != null }">
 										    <font color="red">此用户还没有激活</font>
 										</c:if>
 									</td>
 								</tr>
-
 								<tr>
 									<th>密&nbsp;&nbsp;码:</th>
-									<td><form:password id="password" path="password"
+									<td><form:password id="password" path="cusPwd"
 										class="text" maxlength="20"/>
 										<c:if test="${notPassword != null}">
 										    <font color="red">密码错误</font>
@@ -95,7 +76,7 @@
 										<span class="fieldSet">
 											<input type="text" id="captcha" name="checkcode" class="text captcha" maxlength="4"/>
 											<img id="captchaImage" class="captchaImage" 
-											src="${pageContext.request.contextPath}/getCheckCodeImage" title="点击更换验证码"/>
+											src="${pageContext.request.contextPath}/getCheckCode" title="点击更换验证码"/>
 										</span>
 										<c:if test="${errorCheckCode != null}">
 										    <font color="red">验证码出错</font>

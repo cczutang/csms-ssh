@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sun.tracing.dtrace.ModuleAttributes;
+
 import cn.zaysx.csms.model.Admin;
 import cn.zaysx.csms.model.Customer;
 import cn.zaysx.csms.model.Product;
@@ -83,9 +85,7 @@ public class AdminController {
     	return mod;
     }
     
-    //管理员更新会员信息update_customer
-    
-  //修改商品
+    //管理员更新会员信息
     @RequestMapping(value = "update_customer")
     public ModelAndView updateCustomer(@ModelAttribute("customer") Customer customer
             ,  @RequestParam(value = "cusId")String cusId, HttpServletRequest request, String productCompany) {
@@ -100,4 +100,17 @@ public class AdminController {
         ModelAndView modelAndView = new ModelAndView("redirect:/listCustomer?page=1");
         return modelAndView;
     }
+    
+    //查找一个会员
+    @RequestMapping(value = "admin_edit")
+    public ModelAndView findCustomer(@RequestParam(value = "id")String id){
+    	Customer customer = adminService.findUserByCid(id);
+    	ModelAndView modelAndView = new ModelAndView("admin_edit");
+    	if(customer == null){
+    		modelAndView.addObject("msg", 0);
+    	}		
+    	modelAndView.addObject("customer", customer);
+        return modelAndView;
+    }
+    
 }

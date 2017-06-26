@@ -55,7 +55,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public void updateCustomer(Customer customer) {
-		// TODO Auto-generated method stub
+		adminDAO.updateCussstomer(customer);
 		
 	}
 
@@ -85,8 +85,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public Customer findUserByCid(String customerId) {
-		// TODO Auto-generated method stub
-		return null;
+		return adminDAO.findCustomer(customerId);
 	}
 
 	@Override
