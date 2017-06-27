@@ -18,16 +18,6 @@ public class ProductServiceImpl implements ProductService{
 	@Resource
     private ProductDAO productDAO;
 	
-	@Override
-	public List<Product> findByType(String productType, Integer page) {
-		
-		return productDAO.findByType(productType, page);
-	}
-
-	@Override
-	public List<Product> findByCompany(String productCompany, Integer page) {
-		return productDAO.findByType(productCompany, page);
-	}
 
 	@Override
 	public List<Product> findHot() {
@@ -37,8 +27,8 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public List<Product> findNew() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return productDAO.findNew();
 	}
 
 	@Override
@@ -83,5 +73,28 @@ public class ProductServiceImpl implements ProductService{
 	public int delProductByEnable(Integer productId) {
 		return productDAO.deleteProductToEnable(productId);
 	}
+
+	@Override
+	public List<Product> findByCatesId(Integer catesId, Integer page) {
+		
+		return productDAO.findByCategorySecondCatesId(catesId, page);
+	}
+
+	@Override
+	public List<Product> findByCateId(Integer cateId, Integer page) {
+		return productDAO.findByCategoryCateId(cateId, page);
+	}
+
+	@Override
+	public Integer CountPageProductFromCategory(Integer cateId) {
+		Integer count = productDAO.CountPageProductFromCategory(cateId);
+        return (count % 12 == 0 ? (count / 12) : (count / 12 + 1));
+	}
+
+	@Override
+	public Integer CountPageProductFromCategorySecond(Integer catesId) {
+		Integer count = productDAO.CountPageProductFromCategorySecond(catesId);
+        return (count % 12 == 0 ? (count / 12) : (count / 12 + 1));
+    }
 
 }

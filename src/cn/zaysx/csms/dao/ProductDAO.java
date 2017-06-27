@@ -19,20 +19,7 @@ public interface ProductDAO extends BaseDAO<Product>{
      */
     public List<Product> findNew();
 
-    /**
-     * 根据公司查询产品
-     * @param com
-     * @return
-     */
-    public List<Product> findByCompany(String productCompany, int page);
-    
-    /**
-     * 根据种类查找产品
-     * @param type
-     * @return
-     */
-    public List<Product> findByType(String productType, int page);
-    
+
     /**
      *计算个数
      * @return
@@ -74,4 +61,31 @@ public interface ProductDAO extends BaseDAO<Product>{
     public int deleteProductToEnable(Integer productId);
     
     public List<Product> seaProductByLike(String likesql);
+    
+    /**
+     * 根据二级分类查询商品
+     *
+     * @param catesId
+     * @param page
+     * @return
+     */
+    public List<Product> findByCategorySecondCatesId(Integer catesId, Integer page);
+
+    /**
+     * 根据一级分类查询商品
+     *
+     * @param cateId
+     * @param page
+     * @return
+     */
+    public List<Product> findByCategoryCateId(Integer cateId, Integer page);
+    
+    /**
+     * 
+     * @param cid
+     * @return
+     */
+    public Integer CountPageProductFromCategory(Integer cateId);
+
+    public Integer CountPageProductFromCategorySecond(Integer catesId);
 }

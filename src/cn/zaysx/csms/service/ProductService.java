@@ -9,11 +9,11 @@ public interface ProductService {
     //分页查询商品
     public List<Product> listProduct(Integer page, Integer productEnable);
 	
-    // 根据分类查询商品
+/*    // 根据分类查询商品
     public List<Product> findByType(String productType, Integer page);
     
     // 根据商家查询商品
-    public List<Product> findByCompany(String productCompany, Integer page);
+    public List<Product> findByCompany(String productCompany, Integer page);*/
     
 
     // 查找最热的商品10条
@@ -31,6 +31,12 @@ public interface ProductService {
     //返回公司有多少页数据
     public Integer CountPageProductCompany(String productCompany);
     
+    // 返回一级有多少页的数据
+    public Integer CountPageProductFromCategory(Integer cateId);
+
+    // 返回二级分类下游多少的数据
+    public Integer CountPageProductFromCategorySecond(Integer catesId);
+    
     // 更新商品的信息
     public void update(Product product);
 
@@ -41,4 +47,11 @@ public interface ProductService {
     public Integer findCount(Integer productEnable);
     
     public int delProductByEnable(Integer productId);
+    
+    // 根据二级分类查询商品
+    public List<Product> findByCatesId(Integer catesId, Integer page);
+
+    // 根据一级分类查询商品
+    public List<Product> findByCateId(Integer cateId, Integer page);
+
 }

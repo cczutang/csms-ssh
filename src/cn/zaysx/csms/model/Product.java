@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -43,8 +45,10 @@ public class Product {
 	@Column(name="productType")
     private String productType;
 	
-	@Column(name="productCompany")
-	private String productCompany;
+	// 二级分类的外键:使用二级分类的对象.
+    @JoinColumn(name = "catesId")
+    @ManyToOne
+    private CategorySecond productCompany;
 
 	public Integer getProductId() {
 		return productId;
@@ -126,12 +130,18 @@ public class Product {
 		this.productType = productType;
 	}
 
-	public String getProductCompany() {
+	public CategorySecond getProductCompany() {
 		return productCompany;
 	}
 
-	public void setProductCompany(String productCompany) {
+	public void setProductCompany(CategorySecond productCompany) {
 		this.productCompany = productCompany;
 	}
 	
+	@Override
+    public String toString() {
+        return "Product [productId=" + productId + ", productName=" + productName + ", productShopPrice=" + productShopPrice + ", productPrice="
+                + productPrice + ", productImage=" + productImage + ", productDesc=" + productDesc + ", productType=" + productType + ", productDate=" + productDate
+                + ", productCompany=" + productCompany + "]";
+    }
 }

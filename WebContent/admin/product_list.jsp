@@ -23,7 +23,7 @@
  <div class="rt_content">
       <div class="page_title">
        <h2 class="fl">商品列表</h2>
-       <a href="${pageContext.request.contextPath}/admin/product_add.jsp" class="fr top_rt_btn add_icon">添加商品</a>
+       <a href="${pageContext.request.contextPath}/add_product_before" class="fr top_rt_btn add_icon">添加商品</a>
       </div>
        <form action = "${pageContext.request.contextPath}/findProduct" method = "post">
        <section class="mtb">
@@ -65,7 +65,7 @@
         <td class="center">${p.productInventory}</td>
         <td class="center">
          <a href="http://www.mycodes.net" title="预览" class="link_icon" target="_blank">&#118;</a>
-         <a href="${pageContext.request.contextPath}/product_edit?id=${p.productId}" title="编辑" class="link_icon">&#101;</a>
+         <a href="${pageContext.request.contextPath}/update_product_before?id=${p.productId}" title="编辑" class="link_icon">&#101;</a>
          <a href="${pageContext.request.contextPath}/delete_product/${p.productId}" title="删除" class="link_icon">&#100;</a>
         </td>
        </tr>

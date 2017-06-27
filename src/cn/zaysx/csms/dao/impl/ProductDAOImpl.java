@@ -15,7 +15,12 @@ import cn.zaysx.csms.model.Product;
 @SuppressWarnings("all")
 public class ProductDAOImpl extends BaseDAOImpl<Product> implements ProductDAO {
 
-	private List<Product> Query(String parm, Integer page, String hql) {
+	
+	final String selecthql = "select p.productId,p.productName,"
+	            + "p.productPrice,p.productShopPrice,p.productImage,"
+	            + "p.productDesc,p.productDate,p.productEnable,productType ";
+	
+	private List<Product> Query(Integer parm, Integer page, String hql) {
         int rows = 5;
         Query query = this.getCurrentSession().createQuery(hql);
         query.setParameter(0, parm);
@@ -34,14 +39,11 @@ public class ProductDAOImpl extends BaseDAOImpl<Product> implements ProductDAO {
             product.setProductName((String) obj[1]);
             product.setProductPrice((double) obj[2]);
             product.setProductShopPrice((double) obj[3]);
-            int inv = (Integer) obj[4] ;
-            product.setProductInventory(inv);
-            product.setProductImage((String) obj[5]);
-            product.setProductDesc((String) obj[6]);
-            product.setProductDate((String) obj[7]);
-            product.setProductEnable((Integer) obj[8]);
-            product.setProductCompany((String) obj[9]);
-            product.setProductType((String) obj[10]);
+            product.setProductImage((String) obj[4]);
+            product.setProductDesc((String) obj[5]);
+            product.setProductDate((String) obj[6]);
+            product.setProductEnable((Integer) obj[7]);
+            product.setProductType((String) obj[8]);
             products.add(product);
         }
         return products;
@@ -55,22 +57,11 @@ public class ProductDAOImpl extends BaseDAOImpl<Product> implements ProductDAO {
 
 	@Override
 	public List<Product> findNew() {
-		// TODO Auto-generated method stub
-		return null;
+		String hql = "from Product order by length(productDate)";
+		int rows = 10;
+	    return find(hql, 1, rows);
 	}
-
-	@Override
-	public List<Product> findByCompany(String productCompany, int page) {
-		String hql = "from Product p where p.productCompany = ? and p.productEnable = 1";
-        return Query(productCompany, page, hql);
-	}
-
-	@Override
-	public List<Product> findByType(String productType, int page) {
-		String hql = "from Product p where p.productType = ? and p.productEnable = 1";
-        return Query(productType, page, hql);
-	}
-
+	
 	@Override
 	public Integer CountProduct(Integer productEnable) {
 		String hql = "select count(*) from Product where productEnable ="+productEnable;
@@ -119,6 +110,34 @@ public class ProductDAOImpl extends BaseDAOImpl<Product> implements ProductDAO {
 	public List<Product> seaProductByLike(String likesql) {
 		
 		return null;
+	}
+
+	@Override
+	public List<Product> findByCategorySecondCatesId(Integer catesId, Integer page) {
+		String hql = selecthql + "from Product p ,CategorySecond cs ";
+	    hql += "where p.productCompany.catesId = cs.catesId and cs.catesId = ?";
+	    return Query(catesId, page, hql);
+	}
+
+	@Override
+	public List<Product> findByCategoryCateId(Integer cateId, Integer page) {
+		String hql = selecthql + "from Product p,Category c, CategorySecond cs ";
+        hql += "where p.productCompany.catesId = cs.catesId and cs.category.cateId = c.cateId and c.cateId = ?";
+        return Query(cateId, page, hql);
+	}
+
+	@Override
+	public Integer CountPageProductFromCategory(Integer cateId) {
+		String hql = "select count(*) from Product p, Category c, CategorySecond cs ";
+		hql += "where p.productCompany.catesId = cs.catesId and cs.category.cateId = c.cateId and c.cateId = ?";
+		return count(hql, cateId+"");
+	}
+
+	@Override
+	public Integer CountPageProductFromCategorySecond(Integer catesId) {
+		String hql = "select count(*) from Product p ,CategorySecond cs ";
+	    hql += "where p.productCompany.catesId = cs.catesId and cs.catesId = ?";
+	    return count(hql, catesId+"");
 	}
 
 }

@@ -42,12 +42,12 @@
 
 <div class="span24">
     <ul class="mainNav">
-        <li><a href="${ pageContext.request.contextPath }/index">首页</a>|</li>
+        <li><a href="${ pageContext.request.contextPath}/admin/user/index.jsp">首页</a>|</li>
 
         <c:forEach items="${sessionScope.cList}" var="c">
             <li>
-                <a href="${ pageContext.request.contextPath }/findByCid/<c:out value="${c.cid}"/>/1">
-                <c:out value="${c.cname}"></c:out>
+                <a href="${ pageContext.request.contextPath }/findByCid/<c:out value="${c.cateId}"/>/1">
+                <c:out value="${c.cateName}"></c:out>
             </a>
             </li>
         </c:forEach>

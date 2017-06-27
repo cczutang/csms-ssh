@@ -20,7 +20,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import cn.zaysx.csms.model.Category;
+import cn.zaysx.csms.model.CategorySecond;
 import cn.zaysx.csms.model.Product;
+import cn.zaysx.csms.service.CategorySecondService;
+import cn.zaysx.csms.service.CategoryService;
 import cn.zaysx.csms.service.ProductService;
 
 @Controller
@@ -28,8 +32,13 @@ public class ProdutController {
 	@Autowired
 	private ProductService productService;
 	
+	@Autowired
+	private CategoryService categoryService;
 	
-	//条件查询并分页显示
+	@Autowired
+	private CategorySecondService categorySecondService;
+
+/*	//条件查询并分页显示
 	@RequestMapping(value = "findProduct")
     public ModelAndView  showProduct(@RequestParam("selectValue") String selectValue,
     		@RequestParam("inputValue") String inputValue,
@@ -67,9 +76,9 @@ public class ProdutController {
 			}
 		}
     	return mod;
-    }
+    }*/
 	
-	//分页显示订单
+	//分页显示商品
 	@RequestMapping(value = "listProduct")
     public ModelAndView  showOrder(@RequestParam("page") Integer page,
     		@RequestParam("type") Integer type){
@@ -101,15 +110,32 @@ public class ProdutController {
 			return mod;
 		}
     }
+	//更新商品之前update_product_before
+    @RequestMapping(value = "update_product_before")
+    public ModelAndView beforeUpdateProduct(@RequestParam("id")Integer id){ 	
+    	ModelAndView modelAndView = new ModelAndView("product_edit");
+    	List<CategorySecond> clist = categorySecondService.findCategorySecondList();
+        List<Category> tlist = categoryService.getCategory();
+        Product oldProduct = productService.findByPid(id);
+        modelAndView.addObject("product", oldProduct);
+    	modelAndView.addObject("clist", clist);
+    	modelAndView.addObject("tlist", tlist);
+    	return modelAndView;                              	
+    }
 	
 	//修改商品
     @RequestMapping(value = "update_product")
     public ModelAndView updateProduct(@ModelAttribute("product") Product product
-            , @RequestParam("upload") CommonsMultipartFile upload, HttpServletRequest request, String productCompany) {
+            , @RequestParam("upload") CommonsMultipartFile upload
+            , HttpServletRequest request, Integer catesId) {
         ServletContext servletContext = request.getSession().getServletContext();
         //查询该商品
         Product oldProduct = productService.findByPid(product.getProductId());
-        
+
+	    CategorySecond categorySecond = categorySecondService.findCategorySecond(catesId);
+	    product.setProductCompany(categorySecond);
+	    String type = categorySecond.getCatesName();
+	    
         //从字符串截出该图片的名称
         int begin = oldProduct.getProductImage().lastIndexOf("/");
         String filename = oldProduct.getProductImage().substring(begin + 1, oldProduct.getProductImage().length());
@@ -118,14 +144,14 @@ public class ProdutController {
         //如果上传的图片的名称和旧的照片不一致
         if (filename != uploadFilename && !"".equals(uploadFilename)) {
             //获取文件保存目录
-            String path = servletContext.getRealPath("/upload/"+productCompany);
+            String path = servletContext.getRealPath("/upload/"+type);
             try {
                 FileUtils.writeByteArrayToFile(new File(path, uploadFilename), upload.getBytes());
             } catch (IOException e) {
                 e.printStackTrace();
             }
             //重新设置文件的路径
-            product.setProductImage("upload/"+productCompany+"/" + uploadFilename);
+            product.setProductImage("upload/"+type+"/" + uploadFilename);
             //更新商品的时间
             Date date = new Date();
             String sDate = (new SimpleDateFormat("yyyy-MM-dd")).format(date); 
@@ -141,19 +167,37 @@ public class ProdutController {
         }
         product.setProductEnable(1);      
         productService.update(product);
-        ModelAndView modelAndView = new ModelAndView("redirect:/listProduct?page=1");
+        ModelAndView modelAndView = new ModelAndView("redirect:/listProduct?page=1&type=1");
         return modelAndView;
     }
 	
 	//添加商品add_product
+    @RequestMapping(value = "add_product_before")
+    public ModelAndView beforeAddProduct( ){
+    	
+    	ModelAndView modelAndView = new ModelAndView("product_add");
+    	List<CategorySecond> clist = categorySecondService.findCategorySecondList();
+        List<Category> tlist = categoryService.getCategory();
+    	modelAndView.addObject("clist", clist);
+    	modelAndView.addObject("tlist", tlist);
+    	return modelAndView;                              	
+    }
+    
+    //跳转到添加商品add_product
     @RequestMapping(value = "add_product", method = RequestMethod.POST)
     public ModelAndView addProduct(@ModelAttribute("product") Product product,
                                    @RequestParam("upload") CommonsMultipartFile upload, HttpServletRequest request,
-                                   String productType) {
-    	
+                                    Integer catesId) {
+    	String type = "other";
+		if (catesId != null) {
+		    //该商品所属的二级分类
+		    CategorySecond categorySecond = categorySecondService.findCategorySecond(catesId);
+		    product.setProductCompany(categorySecond);
+		    type = categorySecond.getCatesName();
+		}
     	//获取文件保存目录
         ServletContext servletContext = request.getSession().getServletContext();
-        String path = servletContext.getRealPath("/upload/"+productType);
+        String path = servletContext.getRealPath("/upload/"+type);
         //获取文件的名称
         String filename = upload.getOriginalFilename();
         try {
@@ -162,7 +206,7 @@ public class ProdutController {
             e.printStackTrace();
         }
         //设置文件的路径
-        product.setProductImage("upload/"+product.getProductCompany()+"/" + filename);
+        product.setProductImage("upload/"+type+"/" + filename);
         //设置上传的时间
         Date date = new Date();
         String sDate = (new SimpleDateFormat("yyyy-MM-dd")).format(date); 
@@ -171,7 +215,7 @@ public class ProdutController {
         //保存商品
         productService.save(product);
 
-        ModelAndView modelAndView = new ModelAndView("redirect:/listProduct?page=1");
+        ModelAndView modelAndView = new ModelAndView("redirect:/listProduct?page=1&type=1");
         return modelAndView;
     }
 	

@@ -40,7 +40,7 @@
         <div id="hotProduct" class="hotProduct clearfix">
 
             <div class="title">
-                <strong>热门商品</strong>
+                <strong>最新商品</strong>
             </div>
 
             <ul class="tab">
@@ -48,49 +48,21 @@
                 <li><a target="_blank"></a></li>
                 <li><a target="_blank"></a></li>
             </ul>
-
             <ul class="tabContent" style="display: block;">
-                <c:forEach var="p" items="${hList}">
+                <c:forEach var="p" items="${nList}">
                     <li>
-                        <a href="${pageContext.request.contextPath }/findByPid/<c:out value="${p.pid}"/>"
+                        <a href="${pageContext.request.contextPath }/findByPid/<c:out value="${p.productId}"/>"
                             target="_blank"> <img
-                            src="${pageContext.request.contextPath }/<c:out value="${p.image }"/>"
-                            style="display: block;"/></a>
+                            src="${pageContext.request.contextPath }/<c:out value="${p.productImage }"/>"
+                            style="display: block;"/>                           
+                        </a>
+                        ${p.productName}
                     </li>
-                </c:forEach>
+                </c:forEach>     
             </ul>
         </div>
-    </div>
-
-    <!-- 最新商品 -->
-    <div class="span24">
-        <div id="newProduct" class="newProduct clearfix">
-            <div class="title">
-                <strong>最新商品</strong> <a target="_blank"></a>
-            </div>
-            <ul class="tab">
-                <li class="current"><a href="#" target="_blank"></a></li>
-                <li><a target="_blank"></a></li>
-                <li><a target="_blank"></a></li>
-            </ul>
-
-            <ul class="tabContent" style="display: block;">
-                <c:forEach items="${nList }" var="p">
-                    <li><a
-                            href="${pageContext.request.contextPath }/findByPid/<c:out value="${p.pid}"/>"
-                            target="_blank"><img
-                            src="${pageContext.request.contextPath}/<c:out value="${p.image}"/>"
-                            style="display: block;"/></a></li>
-                </c:forEach>
-            </ul>
-        </div>
-    </div>
-
-    <div class="span24">
-
     </div>
 </div>
-
 <div class="container footer">
     <%--<div class="span24">
         <div class="copyright">Copyright © 2016-2016  版权所有</div>

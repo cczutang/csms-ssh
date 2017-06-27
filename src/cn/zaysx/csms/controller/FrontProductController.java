@@ -1,6 +1,7 @@
 package cn.zaysx.csms.controller;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -23,5 +24,24 @@ public class FrontProductController {
     public String findByPid(@PathVariable("pid") Integer pid, Map<String, Object> map) {
 
         return "product";
+    }
+    
+    //首页中点击一级分类查询商品
+    @RequestMapping(value = "/findByCid/{cateId}/{page}")
+    public String findByCid(@PathVariable("cateId") Integer cateId, @PathVariable("page") Integer page
+            , Map<String, Object> map) {
+
+        List<Product> products = productService.findByCateId(cateId, page);
+        Integer count = productService.CountPageProductFromCategory(cateId);
+        if (page > count) {
+            page = 1;
+        }
+        map.put("products", products);
+        //把当前的页数存放到map中
+        map.put("page", page);
+        //总共有多少页
+        map.put("count", count);
+        map.put("cateId", cateId);
+        return "productList";
     }
 }

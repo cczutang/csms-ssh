@@ -90,6 +90,7 @@ public class BaseDAOImpl<T> implements BaseDAO<T> {
 	@Override
 	public Integer count(String hql, String parm) {
 		Query q = sessionFactory.getCurrentSession().createQuery(hql);
+		
 		q.setParameter(0, parm);
 		List cc = q.list();
 		Long a = (Long) cc.get(0);

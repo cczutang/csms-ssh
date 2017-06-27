@@ -76,26 +76,11 @@
        
        <li>
         <span class="item_name" style="width:120px;" >品牌：</span>
-        <select class="select" name = "productCompany">
-         <option value = "">---选择品牌---</option>
-         <option value = "联想">联想</option>
-         <option value = "戴尔">戴尔</option>
-         <option value = "惠普">惠普</option>
-         <option value = "苹果">苹果</option>
-         <option value = "华硕">华硕</option>
-         <option value = "神舟">神舟</option>
-         <option value = "Acer弘基">Acer弘基</option>
-         <option value = "机械革命">机械革命</option>
-         <option value = "MSI微星">MSI微星</option>
-         <option value = "三星">三星</option>
-         <option value = "雷神">雷神</option>
-         <option value = "微软">微软</option>
-         <option value = "华为">华为</option>
-         <option value = "小米">小米</option>
-         <option value = "雷神">雷神</option>
-         <option value = "东芝">东芝</option>
-         <option value = "清华同方">清华同方</option>
-         <option value = "索尼">索尼</option>
+        <select class="select" name = "catesId">
+        <option value = "">---选择品牌---</option>
+         <c:forEach var = "pc" items = "${clist}">
+         	<option value = "${pc.catesId}">${pc.catesName}</option>
+         </c:forEach>
         </select>
        </li>
        
@@ -103,14 +88,11 @@
         <span class="item_name" style="width:120px;">分类：</span>
         <select class="select" name = "productType">
         <option value = "">---选择种类---</option>
-         <option value = "笔记本电脑">笔记本电脑</option>
-         <option value = "平板电脑">平板电脑</option>
-         <option value = "台式机">台式机</option>
-         <option value = "一体机">一体机</option>
-         <option value = "其他配件">其他配件</option>
+        <c:forEach var = "tc" items = "${tlist}">
+         	<option value = "${tc.cateName}">${tc.cateName}</option>
+         </c:forEach>
         </select>
-       </li>
-       
+       </li>    
        <li>
         <span class="item_name" style="width:120px;">上传图片：</span>
         <label class="uploadImg">
