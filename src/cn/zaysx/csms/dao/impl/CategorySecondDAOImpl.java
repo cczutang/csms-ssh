@@ -6,7 +6,6 @@ import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import cn.zaysx.csms.dao.CategorySecondDAO;
-import cn.zaysx.csms.model.Category;
 import cn.zaysx.csms.model.CategorySecond;
 
 @Repository("categorySecondDAO")

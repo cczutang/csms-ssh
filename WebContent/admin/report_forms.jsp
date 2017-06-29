@@ -4,13 +4,12 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>电脑销售管理系统</title>
+	<title>后台管理系统</title>
 	<meta name="author" content="DeathGhost" />
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
 	<script src="../js/jquery.js"></script>
 	<script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
 </head>
 <body>
-
 </body>
 </html>

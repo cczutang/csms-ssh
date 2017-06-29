@@ -6,7 +6,7 @@
     <div class="topNav clearfix">
         <ul>
             <!-- 若用户未登录 -->
-            <c:if test="${sessionScope.user == null}">
+            <c:if test="${sessionScope.customer == null}">
                 <li id="headerLogin" class="headerLogin" style="display: list-item;">
                     <a href="${ pageContext.request.contextPath }/userLogin">登录</a>|
                 </li>
@@ -17,9 +17,9 @@
             </c:if>
 
             <!-- 若用户已登录 -->
-            <c:if test="${sessionScope.user != null}">
+            <c:if test="${sessionScope.customer != null}">
                 <li id="headerLogin" class="headerLogin" style="display: list-item;">
-                    <c:out value="${user.username }"/>
+                    <c:out value="${customer.cusName }"/>
                 </li>
                 <li id="headerLogin" class="headerLogin" style="display: list-item;">
                     <a href="${ pageContext.request.contextPath }/findOrderByUid/1">我的订单</a>
@@ -42,7 +42,7 @@
 
 <div class="span24">
     <ul class="mainNav">
-        <li><a href="${ pageContext.request.contextPath}/admin/user/index.jsp">首页</a>|</li>
+        <li><a href="${ pageContext.request.contextPath}/main">首页</a>|</li>
 
         <c:forEach items="${sessionScope.cList}" var="c">
             <li>

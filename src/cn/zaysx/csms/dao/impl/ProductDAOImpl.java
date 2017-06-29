@@ -3,8 +3,13 @@ package cn.zaysx.csms.dao.impl;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +20,22 @@ import cn.zaysx.csms.model.Product;
 @SuppressWarnings("all")
 public class ProductDAOImpl extends BaseDAOImpl<Product> implements ProductDAO {
 
+	
+	@Autowired
+    private SessionFactory sessionFactory;
+    
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
+    @Autowired
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    protected Session getCurrentSession() {
+        return this.sessionFactory.getCurrentSession();
+    }
 	
 	final String selecthql = "select p.productId,p.productName,"
 	            + "p.productPrice,p.productShopPrice,p.productImage,"
@@ -138,6 +159,13 @@ public class ProductDAOImpl extends BaseDAOImpl<Product> implements ProductDAO {
 		String hql = "select count(*) from Product p ,CategorySecond cs ";
 	    hql += "where p.productCompany.catesId = cs.catesId and cs.catesId = ?";
 	    return count(hql, catesId+"");
+	}
+
+	@Override
+	public List<Map<String, Object>> chartCount() {
+		String hql = "select new map(productType, sum(productInventory)) from Product group by productType";	
+		Query q = this.getCurrentSession().createQuery(hql);
+	    return q.list();
 	}
 
 }

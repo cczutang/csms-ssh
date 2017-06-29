@@ -19,8 +19,10 @@ public interface OrderService {
 
     // 业务层查询所有订单方法
     public List<Order> findAll(Integer page);
-
+    
+    //根据订单号查询订单
     public Integer findCountByCid(String cid);
     
+    //统计订单数
     public Integer findCount();
 }

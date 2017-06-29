@@ -49,14 +49,15 @@
                 <li><a target="_blank"></a></li>
             </ul>
             <ul class="tabContent" style="display: block;">
-                <c:forEach var="p" items="${nList}">
+                <c:forEach var="p" items="${nList}">             
                     <li>
-                        <a href="${pageContext.request.contextPath }/findByPid/<c:out value="${p.productId}"/>"
+                        <a href="${pageContext.request.contextPath }/findByPid?id=<c:out value="${p.productId}"/>"
                             target="_blank"> <img
                             src="${pageContext.request.contextPath }/<c:out value="${p.productImage }"/>"
                             style="display: block;"/>                           
                         </a>
-                        ${p.productName}
+                        <a target="_blank" href = "${pageContext.request.contextPath }/findByPid/${p.productId}">${p.productName}</a><br />
+                      	  价格：<span style = "color:red;font-size:20px">￥${p.productPrice }</span>
                     </li>
                 </c:forEach>     
             </ul>

@@ -11,26 +11,6 @@
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
 	<script src="../js/jquery.js"></script>
 	<script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
-	<script>
-		(function($){
-			$(window).load(function(){			
-				$("a[rel='load-content']").click(function(e){
-					e.preventDefault();
-					var url=$(this).attr("href");
-					$.get(url,function(data){
-						$(".content .mCSB_container").append(data); //load new content inside .mCSB_container
-						//scroll-to appended content 
-						$(".content").mCustomScrollbar("scrollTo","h2:last");
-					});
-				});
-				
-				$(".content").delegate("a[href='top']","click",function(e){
-					e.preventDefault();
-					$(".content").mCustomScrollbar("scrollTo",$(this).attr("href"));
-				});
-			});
-		})(jQuery);
-	</script>
 </head>
 <body>
 <section class="rt_wrap content mCustomScrollbar">
@@ -100,14 +80,17 @@
       <aside class="mtb" style="text-align:right;">
        <label>管理员操作：</label>
        <input type="text" class="textbox textbox_295" placeholder="管理员操作备注"/>
-       <input type="button" value="打印订单" class="group_btn"/>
-       <input type="button" value="确认订单" class="group_btn"/>
-       <input type="button" value="付款" class="group_btn"/>
-       <input type="button" value="配货" class="group_btn"/>
-       <input type="button" value="发货" class="group_btn"/>
-       <input type="button" value="确认收货" class="group_btn"/>
+       <input type="button" value="打印订单" class="group_btn" name = "stamp"/>
+       <input type="button" value="确认订单" class="group_btn" name = "confirm"/>
+       <input type="button" value="配货" class="group_btn" name = "prepare"/>
+       <input type="button" value="发货" class="group_btn" name = "send"/>
       </aside>
  </div>
 </section>
 </body>
+<script type="text/javascript">
+	$("input").on("click",function(){
+		alert($(this).attr('name'));
+	});
+</script>
 </html>

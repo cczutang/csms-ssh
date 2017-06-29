@@ -1,6 +1,7 @@
 package cn.zaysx.csms.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import cn.zaysx.csms.model.Product;
 
@@ -88,4 +89,7 @@ public interface ProductDAO extends BaseDAO<Product>{
     public Integer CountPageProductFromCategory(Integer cateId);
 
     public Integer CountPageProductFromCategorySecond(Integer catesId);
+     
+    public List<Map<String, Object>> chartCount();
+    
 }

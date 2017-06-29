@@ -97,15 +97,19 @@ public class OrderController {
     	switch(op){
 	    	case "stamp":{
 	    		
+	    		break;
 	    	}
 	    	case "confirm":{
 	    		
+	    		break;
 	    	}
 	    	case "prepare":{
 	    		
+	    		break;
 	    	}
 	    	case "send":{
 	    		
+	    		break;
 	    	}
     	}
         return "order_details";

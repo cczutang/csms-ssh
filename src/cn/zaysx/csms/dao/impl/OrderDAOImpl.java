@@ -1,6 +1,7 @@
 package cn.zaysx.csms.dao.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,12 +11,13 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.zaysx.csms.dao.OrderDAO;
+import cn.zaysx.csms.model.FullCalendar;
 import cn.zaysx.csms.model.Order;
 
 @Repository("orderDAO")
 @SuppressWarnings("all")
 public class OrderDAOImpl extends BaseDAOImpl<Order> implements OrderDAO {
-
+	
 	@Autowired
 	private SessionFactory sessionFactory;
 	
@@ -91,6 +93,13 @@ public class OrderDAOImpl extends BaseDAOImpl<Order> implements OrderDAO {
 		String hql = "from Order o where o.orderEnable = 1 order by o.orderTime desc";
         Query query = this.getCurrentSession().createQuery(hql);
         return query.setFirstResult((begin - 1) * limit).setMaxResults(limit).list();
+	}
+
+	@Override
+	public List<FullCalendar> orderTotal(String type) {
+		String hql = "select count(Id), sum(orderTotal), orderTime from orders where orderType='正常' and orderStatus='已签收' and orderEnable=1 group BY orderTime ORDER BY orderTime";
+		
+		return null;
 	}
 
 }

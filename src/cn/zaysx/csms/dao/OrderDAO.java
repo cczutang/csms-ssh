@@ -1,7 +1,9 @@
 package cn.zaysx.csms.dao;
 
 import java.util.List;
+import java.util.Map;
 
+import cn.zaysx.csms.model.FullCalendar;
 import cn.zaysx.csms.model.Order;
 
 public interface OrderDAO extends BaseDAO<Order>{
@@ -47,6 +49,6 @@ public interface OrderDAO extends BaseDAO<Order>{
      */
     public List<Order> findByPage(int begin, int limit);
 
-
+    public List<FullCalendar> orderTotal(String type);
 
 }

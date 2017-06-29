@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import cn.zaysx.csms.model.Product;
 import cn.zaysx.csms.service.ProductService;
@@ -19,11 +20,13 @@ public class FrontProductController {
 	
 	@Resource
 	private ProductService productService;
+	
 	//根据商品的pid查询商品
-    @RequestMapping(value = "findByPid/{pid}", method = RequestMethod.GET)
-    public String findByPid(@PathVariable("pid") Integer pid, Map<String, Object> map) {
-
-        return "product";
+    @RequestMapping(value = "findByPid", method = RequestMethod.GET)
+    public String findByPid(@RequestParam("id") Integer id, Map<String, Object> map) {
+    	Product product = productService.findByPid(id);
+    	map.put("product", product);
+        return "user/product";
     }
     
     //首页中点击一级分类查询商品

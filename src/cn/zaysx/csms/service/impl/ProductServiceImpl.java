@@ -1,6 +1,7 @@
 package cn.zaysx.csms.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -97,4 +98,11 @@ public class ProductServiceImpl implements ProductService{
         return (count % 12 == 0 ? (count / 12) : (count / 12 + 1));
     }
 
+	@Override
+	public List<Map<String, Object>> chartCount() {
+		
+		return productDAO.chartCount();
+	}
+
+	
 }

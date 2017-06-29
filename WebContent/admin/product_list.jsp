@@ -64,7 +64,7 @@
         <td class="center"><a title="是" class="link_icon">&#89;</td>
         <td class="center">${p.productInventory}</td>
         <td class="center">
-         <a href="http://www.mycodes.net" title="预览" class="link_icon" target="_blank">&#118;</a>
+         <a href="${pageContext.request.contextPath}//findByPid?id=${p.productId}" title="预览" class="link_icon" target="_blank">&#118;</a>
          <a href="${pageContext.request.contextPath}/update_product_before?id=${p.productId}" title="编辑" class="link_icon">&#101;</a>
          <a href="${pageContext.request.contextPath}/delete_product/${p.productId}" title="删除" class="link_icon">&#100;</a>
         </td>

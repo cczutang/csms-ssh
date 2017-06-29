@@ -10,12 +10,12 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <title>网上商城</title>
-    <link href="${pageContext.request.contextPath}/css/common.css"
+    <link href="${pageContext.request.contextPath}/css/front-end/common.css"
           rel="stylesheet" type="text/css"/>
-    <link href="${pageContext.request.contextPath}/css/product.css"
+    <link href="${pageContext.request.contextPath}/css/front-end/product.css"
           rel="stylesheet" type="text/css"/>
     <script type="text/javascript"
-            src="${pageContext.request.contextPath}/js/jquery-1.8.3.js"></script>
+            src="${pageContext.request.contextPath}/js/front-end/jquery-1.8.3.js"></script>
 
     <script>
         function saveCart() {
@@ -56,13 +56,13 @@
             <c:forEach var="c" items="${sessionScope.cList }">
                 <dl>
                     <dt>
-                        <a href="${pageContext.request.contextPath }/findByCid/<c:out value="${c.cid}"/>/1"><c:out
-                                value="${c.cname}"/></a>
+                        <a href="${pageContext.request.contextPath }/findByCid?id=<c:out value="${c.cateId}"/>/1"><c:out
+                                value="${c.cateName}"/></a>
                     </dt>
                     <c:forEach var="cs" items="${c.categorySeconds}">
                         <dd>
-                            <a href="${ pageContext.request.contextPath }/findByCsid/<c:out value="${cs.csid}/1"/>"><c:out
-                                    value="${cs.csname}"/></a>
+                            <a href="${ pageContext.request.contextPath }/findByCsid/<c:out value="${cs.catesId}/1"/>"><c:out
+                                    value="${cs.catesName}"/></a>
                         </dd>
                     </c:forEach>
                 </dl>
@@ -76,7 +76,7 @@
                id="zoom" rel="gallery">
                 <div class="zoomPad">
                     <img style="opacity: 1;" title="商品图片" class="medium"
-                         src="${ pageContext.request.contextPath }/<c:out value="${product.image }"/>"/>
+                         src="${ pageContext.request.contextPath }/<c:out value="${product.productImage }"/>"/>
                     <div style="display: block; top: 0px; left: 162px; width: 0px; height: 0px; position: absolute; border-width: 1px;" class="zoomPup"></div>
                     <div style="position: absolute; z-index: 5001; left: 312px; top: 0px; display: block;" class="zoomWindow">
                         <div style="width: 368px;" class="zoomWrapper">
@@ -97,12 +97,12 @@
 
         <!-- 商品的具体信息 -->
         <div class="name">
-            <c:out value="${product.pname }"/>
+            <c:out value="${product.productName }"/>
         </div>
         <div class="sn">
             <div>
                 编号：
-                <c:out value="${product.pid }"/>
+                <c:out value="${product.productId }"/>
             </div>
         </div>
         <div class="info">
@@ -117,40 +117,11 @@
                     %>
 
 
-                    <c:if test="${currentTime ==  privilegeTime}">
-                        <strong>￥：<fmt:formatNumber type="number" minFractionDigits="1"
-                                                    value="${product.shop_price * product.categorySecond.category.discount } "
-                                                    maxFractionDigits="1"/>元
-                        </strong>
-
-                        <%-- 传price变量到CartController，并给CartItem price赋值 --%>
-                        <%--<c:set var="price" value="${product.shop_price * product.categorySecond.category.discount }" />--%>
-                        <fmt:formatNumber var="price" type="number"
-                                          value="${product.shop_price * product.categorySecond.category.discount }"
-                                          maxFractionDigits="1" scope="application"/>
-                        <%
-                            session.setAttribute("price", application.getAttribute("price"));
-                        %>
-
-                    </c:if>
-
-                    <c:if test="${currentTime !=  privilegeTime}">
-                        <strong>￥：<fmt:formatNumber type="number" minFractionDigits="1" value="${product.shop_price }"
-                                                    maxFractionDigits="1"/>元
-                        </strong>
-
-                        <%-- 传price变量到CartController，并给CartItem price赋值 --%>
-                        <fmt:formatNumber var="price" type="number" value="${product.shop_price }" maxFractionDigits="1"
-                                          scope="application"/>
-                        <%
-                            session.setAttribute("price", application.getAttribute("price"));
-                        %>
-
-                    </c:if>
+                  
                     参 考 价：
                     <del>
                         ￥
-                        <c:out value="${product.market_price }"/>
+                        <c:out value="${product.productPrice }"/>
                         元
                     </del>
 
@@ -171,7 +142,7 @@
 
             <!-- 隐藏域传商品id -->
             <input type="hidden" name="pid"
-                   value="<c:out value="${product.pid }"/>"/>
+                   value="<c:out value="${product.productId }"/>"/>
 
             <%--<input type="hidden" name="finalPrice"--%>
             <%--value="${price}" />--%>
@@ -185,8 +156,8 @@
                                onpaste="return false;"/>
                     </dd>
                     <dd>件</dd>
-                    <dd><input id="inventory" type="hidden" value="${product.inventory}"/></dd>
-                    <dd>&nbsp&nbsp库存<c:out value="${product.inventory}"/>件</dd>
+                    <dd><input id="inventory" type="hidden" value="${product.productInventory}"/></dd>
+                    <dd>&nbsp&nbsp库存<c:out value="${product.productInventory}"/>件</dd>
                 </dl>
 
                 <div class="buy">
@@ -205,12 +176,12 @@
         <div id="introduction" name="introduction" class="introduction">
             <div class="title">
                 <!-- 商品的描述 -->
-                <strong><c:out value="${product.pdesc }"/></strong>
+                <strong><c:out value="${product.productDesc }"/></strong>
             </div>
             <div>
                 <!-- 商品图片 -->
                 <img
-                        src="${pageContext.request.contextPath }/<c:out value="${product.image }"/>"/>
+                        src="${pageContext.request.contextPath }/<c:out value="${product.productImage }"/>"/>
             </div>
         </div>
     </div>

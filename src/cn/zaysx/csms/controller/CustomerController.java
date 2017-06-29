@@ -61,7 +61,7 @@ public class CustomerController {
             return "user/login";
         }
         session.setAttribute("customer", c);
-        return "redirect:admin/user/index.jsp";
+        return "redirect:main";
     }
 
     //跳转到用户登录

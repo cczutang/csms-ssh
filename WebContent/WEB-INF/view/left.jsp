@@ -10,7 +10,6 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
 	<script src="${pageContext.request.contextPath}/js/jquery.js"></script>
 	<script src="${pageContext.request.contextPath}/js/jquery.mCustomScrollbar.concat.min.js"></script>
-	
 </head>
 <body>
 <aside class="lt_aside_nav content mCustomScrollbar">
@@ -42,7 +41,15 @@
    <dl>
     <dt>会员管理</dt>
     <dd><a href="${pageContext.request.contextPath}/listCustomer?page=1">会员列表</a></dd>
-    <dd><a href="user_rank.html">会员等级管理</a></dd>
+    <dd><a href="${pageContext.request.contextPath}/admin/user_level.jsp">会员等级管理</a></dd>
+   </dl>
+  </li>
+  <li>
+   <dl>
+    <dt>报表统计</dt>
+    <dd><a href="discharge_statistic.html">销售统计报表</a></dd>
+    <dd><a href="sales_volume.html">订单统计</a></dd>
+    <dd><a href="sales_volume.html">商品统计</a></dd>
    </dl>
   </li>
   <li>
@@ -65,13 +72,6 @@
     <dt>配送与支付设置</dt>
     <dd><a href="express_list.html">配送方式</a></dd>
     <dd><a href="pay_list.html">支付方式</a></dd>
-   </dl>
-  </li>
-  <li>
-   <dl>
-    <dt>报表统计</dt>
-    <dd><a href="discharge_statistic.html">订单量统计</a></dd>
-    <dd><a href="sales_volume.html">销售额统计</a></dd>
    </dl>
   </li>
   <li>

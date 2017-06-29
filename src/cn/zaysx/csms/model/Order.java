@@ -146,6 +146,5 @@ public class Order {
 	public void setOrderEnable(Integer orderEnable) {
 		this.orderEnable = orderEnable;
 	}
-	
-	
+
 }

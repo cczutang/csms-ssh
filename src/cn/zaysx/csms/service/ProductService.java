@@ -1,6 +1,7 @@
 package cn.zaysx.csms.service;
 
 import java.util.List;
+import java.util.Map;
 
 import cn.zaysx.csms.model.Product;
 
@@ -53,5 +54,7 @@ public interface ProductService {
 
     // 根据一级分类查询商品
     public List<Product> findByCateId(Integer cateId, Integer page);
+    
+    public List<Map<String, Object>> chartCount();
 
 }
