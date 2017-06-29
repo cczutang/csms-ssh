@@ -9,9 +9,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>购物车</title>
-    <link href="${pageContext.request.contextPath}/css/common.css"
+    <link href="${pageContext.request.contextPath}/css/front-end/common.css"
           rel="stylesheet" type="text/css"/>
-    <link href="${pageContext.request.contextPath}/css/cart.css"
+    <link href="${pageContext.request.contextPath}/css/front-end/cart.css"
           rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.8.3.js"></script>
 
@@ -88,21 +88,21 @@
                 <c:forEach var="cartItem" items="${sessionScope.cart.cartItems}">
                     <tr>
                         <td width="60">
-                            <a href="${pageContext.request.contextPath }/findByPid/<c:out value="${cartItem.product.pid}"/>">
-                                <img src="${pageContext.request.contextPath}/<c:out value="${cartItem.product.image}"/>"/>
+                            <a href="${pageContext.request.contextPath }/findByPid/<c:out value="${cartItem.product.productId}"/>">
+                                <img src="${pageContext.request.contextPath}/<c:out value="${cartItem.product.productImage}"/>"/>
                             </a>
                         </td>
 
                         <td>
                             <a target="_blank"
-                               href="${ pageContext.request.contextPath }/findByPid/<c:out value="${cartItem.product.pid}"/>">
-                                <c:out value="${cartItem.product.pname}"/>
+                               href="${ pageContext.request.contextPath }/findByPid/<c:out value="${cartItem.product.productId}"/>">
+                                <c:out value="${cartItem.product.productName}"/>
                             </a>
                         </td>
 
                         <c:if test="${currentTime !=  privilegeTime}">
                             <td>￥<fmt:formatNumber type="number" minFractionDigits="1"
-                                                   value="${cartItem.product.shop_price }" maxFractionDigits="1"/>
+                                                   value="${cartItem.product.productShopPrice }" maxFractionDigits="1"/>
                             </td>
                             <%--<td class="quantity" width="60"><c:out value="${cartItem.count}" /></td>--%>
                             <%--<td width="140"><span class="subtotal">￥<c:out--%>
@@ -111,7 +111,7 @@
 
                         <c:if test="${currentTime ==  privilegeTime}">
                             <td>￥<fmt:formatNumber type="number" minFractionDigits="1"
-                                                   value="${cartItem.product.shop_price * cartItem.product.categorySecond.category.discount }"
+                                                   value="${cartItem.product.productShopPrice * cartItem.product.categorySecond.category.discount }"
                                                    maxFractionDigits="1"/>
                             </td>
                             <%--<td class="quantity" width="60"><c:out value="${cartItem.count}" /></td>--%>
